@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Les Evenements en JavaScript</title>
+    <meta charset='utf-8'>
+</head>
+<body>
+    <h1>Les Evenements en JavaScript</h1>
+    <!--Méthode d'evenement écrir directement dans le HTML.  RQ c'est une ancienne méthode qu'on évite d'utilisé-->
+    <p onclick="alert('je suis un texte affiché avec onclick dans une balise HTML')">Cliquez ici !</p>
+    <p onclick="this.textContent = 'texte affiché avec textContent dans HTML'">Deuxiéme paragraphe cliquez ici !</p>
+    <p class='para0'>Troisiéme paragraphe cliquez ici !</p>
+    <p class='para'>Quatriéme paragraphe cliquez ici!</p>
+    <p class="para1">passer la souris sur moi lol </p>
+<script>
+    var p4 = document.querySelector('.para');
+    p4.onclick = function(){
+        this.innerHTML = '<strong>texte modifier en JS</strong>';
+        this.style.color = 'orange'; // this. renvoi directement à <p> ou dans notre cas à p4 
+    };
+    // La méthode addEventListener c'est la meilleur et le plus utilisé
+    var p0 = document.querySelector('.para0');
+    p0.addEventListener('click',changetexte); // dans addEventListner on met dabord l'évenement(click) puis le code de l'action a exécuté (la fonction dans note cas)
+    function changetexte(){
+        this.innerHTML = "<strong> Bravo ! </strong>";
+        this.style.color = '#C7B';
+    }
+    // avec addEventListener on peut lier plusieurs événement à un méme élément
+    var p = document.querySelector('.para1');
+    p.addEventListener('mouseover', fonction1); // mouseover = passer les souris sur l'élément
+    p.addEventListener('mousedown',fonction2); //  mousedown = rester appyer sur la souris
+    
+    function fonction1(){
+        this.innerHTML = 'Cliquez sur moi';
+        this.style.backgroundColor = 'orange';
+    }
+    function fonction2(){
+        this.innerHTML = 'Bravo !!';
+        this.style.color="#55f";
+        this.fontWeight = 'bold';
+        this.fontSize = '24px';
+    }
+    // pour rétablir l'état initial de p :
+    p.addEventListener('mouseout', reset1); // mouseout = quand la souris sort de l'élément
+    p.addEventListener('mouseup',reset2); // mouseup = quand on déclique sur le bouton de la souris
+    
+    function reset1(){
+        this.innerHTML = 'passer la souris sur moi lol';
+        this.style.backgroundColor = '';
+    }
+    
+    function reset2(){
+        this.innerHTML = 'passer la souris sur moi lol';
+        this.style.color="";
+        this.fontWeight = '';
+        this.fontSize = '';
+        
+    }
+    
+    
+</script>
+
+</body>
+</html>
